@@ -57,7 +57,7 @@
 Greetings. I wanted to personally welcome you into my web to learn how to speak the language of power, and how to send messages through the silence.\
 This is **Minitalk**, and I shall be your guide.
 
-# 🕷️ Signals & the tongue of Bits ?
+# 🕷️ The anatomy of a whisper
 
 My lord / lady, before we move on, may I illuminate key concepts on the subtle art of inter-process communication?
 
@@ -281,6 +281,40 @@ $ ./client 1001 "A very small process can cast a very large shadow"
 ```
 
 The server will print the message, one character at a time, as it decodes the bits. As a little bonus, the client will show the binary representation of your message as a courtesy to those who speak this strange language.
+
+# 🕷️ Go further
+
+## Why not use a buffer?
+
+The french version of the subject contains a line that could be misleading: *"Une fois la chaine <ins>entièrement</ins> reçue, le serveur doit l'afficher."*\
+This means: Once the string is <ins>completely</ins> received, the server must display it.
+
+Taken literally, this means that one must wait and gather every character in a buffer before printing the message.
+
+However, in the english subject which is the one to consider:\
+*"The client must send the specified string to the server. Once received, the server must print it."*\
+So this is not specified in the same way.
+
+Were you to gather characters in a buffer, you'd have to use malloc which is **not** an async-signal-safe function.\
+Calling `malloc()` inside a signal handler is dangerous because it can interfere with memory allocation operations that were already in progress, leading to corrupted memory.\
+It must be avoided at all costs inside a handler.
+
+The critical rule when working with signals is that only a specific list of functions can be safely called from within a signal handler:
+```
+man 7 signals
+```
+
+Of course, if you want to comply at all costs with the french subject, you could use a static buffer, but you'll face two new problems:
+
+- Risk of buffer overflow\
+No matter what size you choose, the client could send a string that's longer than the buffer, causing a buffer overflow where you write past the end of your allocated memory.\
+There is no "safe" size for a static buffer.
+
+- "Without delay"\
+The subject states that the server must display the string **without delay**.\
+Using a buffer, the server will not print anything until the entire string is received.\
+For long strings, this will introduce a very noticeable delay between the client sending the message and the server actually displaying it.
+
 
 ## A farewell from the spider
 
