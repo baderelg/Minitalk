@@ -6,7 +6,7 @@
 #    By: baelgadi <baelgadi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/01 01:41:33 by baelgadi          #+#    #+#              #
-#    Updated: 2025/08/05 01:41:51 by baelgadi         ###   ########.fr        #
+#    Updated: 2025/09/08 01:06:39 by baelgadi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,4 +112,4 @@ help:
 
 -include $(DEPS)
 
-.PHONY: all clean fclean re bonus help server client
+.PHONY: all clean fclean re bonus help

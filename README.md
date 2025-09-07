@@ -6,7 +6,8 @@
 
 [![42 School](https://img.shields.io/badge/Paris-blue?logo=42&logoColor=fff)](https://42.fr/en/homepage/)
 [![Bonus](https://img.shields.io/badge/✔️_Bonus-5cb85c)](https://github.com/baderelg/Minitalk) \
-[![Validation date](https://img.shields.io/badge/⏳_WAITING_FOR_EVALUATION-ffc83d?style=for-the-badge)](https://github.com/baderelg/Minitalk)
+<img src="https://i.imgur.com/HTci8UV.png" width="100" alt="Validation confirmation on the 42 Intra @baelgadi - Sep 1st 2025"> \
+[![Validation date](https://img.shields.io/date/1756735200?label=&style=for-the-badge&color=5cb85c)](https://github.com/baderelg/Minitalk)
 
 </div>
 
@@ -301,7 +302,7 @@ It must be avoided at all costs inside a handler.
 
 The critical rule when working with signals is that only a specific list of functions can be safely called from within a signal handler:
 ```
-man 7 signals
+man 7 signal-safety
 ```
 
 Of course, if you want to comply at all costs with the french subject, you could use a static buffer, but you'll face two new problems:
